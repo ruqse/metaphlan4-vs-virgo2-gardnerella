@@ -1,6 +1,6 @@
 # MetaPhlAn 4 cannot resolve the four named *Gardnerella* species, and its printed species names are genome-bin labels rather than species calls; VIRGO2 resolves all four
 
-*A database-content comparison of MetaPhlAn 4 (vJan25_CHOCOPhlAnSGB_202503) and VIRGO2 for the vaginal pathobiont* Gardnerella. *Faruk Dube, 8 June 2026.*
+*A database-content comparison of MetaPhlAn 4 (vJan25_CHOCOPhlAnSGB_202503) and VIRGO2 for the vaginal genus* Gardnerella. *Faruk Dube, 8 June 2026.*
 
 ## Visual summary
 
