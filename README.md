@@ -55,48 +55,6 @@ The four named species fare differently in each tool:
 
 MetaPhlAn yields one summed *vaginalis* row plus two composite rows (`pickettii`, `swidsinskii`), and it drops *piotii* and *leopoldii* from the species column. VIRGO2 keeps all four separate.
 
-<details>
-<summary>Diagram source (Mermaid)</summary>
-
-```mermaid
-flowchart LR
-    subgraph SP["Gardnerella species"]
-        V["G. vaginalis"]:::species
-        P["G. piotii"]:::species
-        L["G. leopoldii"]:::species
-        W["G. swidsinskii"]:::species
-    end
-
-    subgraph MP["MetaPhlAn 4"]
-        MV["MERGED<br/>summed over 7 SGBs<br/>printed as G. vaginalis"]:::merged
-        MPI["FOLDED<br/>hidden in SGB17305<br/>row prints as G. pickettii"]:::folded
-        ML["FOLDED<br/>hidden in SGB17307<br/>row prints as G. swidsinskii"]:::folded
-        MW["MERGED<br/>SGB17307 composite bin<br/>includes G. leopoldii"]:::merged
-    end
-
-    subgraph VG["VIRGO2"]
-        GV["RESOLVED<br/>own species label<br/>plus sub-clades A-F,H"]:::resolved
-        GP["RESOLVED<br/>own species label<br/>separable from G. vaginalis"]:::resolved
-        GL["RESOLVED<br/>own species label<br/>separable from G. swidsinskii"]:::resolved
-        GW["RESOLVED<br/>own species label<br/>separable named species"]:::resolved
-    end
-
-    V --> MV
-    P --> MPI
-    L --> ML
-    W --> MW
-
-    V --> GV
-    P --> GP
-    L --> GL
-    W --> GW
-
-    classDef species fill:#ffffff,stroke:#e5e7eb,color:#111827;
-    classDef resolved fill:#edf8f1,stroke:#2fa25a,color:#111827;
-    classDef merged fill:#fff7dd,stroke:#f2a900,color:#111827;
-    classDef folded fill:#fdeceb,stroke:#ef4444,color:#111827;
-```
-</details>
 
 ## Why the disparity arises
 
@@ -117,7 +75,7 @@ Of 17 commonly studied vaginal taxa examined here, eight are split, merged, or b
 3. Do not interpret a MetaPhlAn `G. pickettii` or `G. swidsinskii` row as that species, because each is a composite bin. If MetaPhlAn must be used, inspect the `t__SGB` identifiers and retain the `additional_species` column.
 4. Re-check per release. These results are anchored to vJan25_CHOCOPhlAnSGB_202503, and a later database could reassign the bins.
 
-VIRGO2 is better, not perfect. Its own paper reports that it slightly underestimates *G. swidsinskii* relative to *G. leopoldii*, and *L. paragasseri* relative to *L. gasseri*, because each pair shares some gene clusters (France et al. 2025). This is the same pair that MetaPhlAn merges into SGB17307, so VIRGO2 improves resolution here without making it flawless.
+VIRGO2 is better, not perfect. The authors reports that it slightly underestimates *G. swidsinskii* relative to *G. leopoldii*, and *L. paragasseri* relative to *L. gasseri*, because each pair shares some gene clusters (France et al. 2025). This is the same pair that MetaPhlAn merges into SGB17307, so VIRGO2 improves resolution here without making it flawless.
 
 ## Reproduce it (about 1 minute)
 
