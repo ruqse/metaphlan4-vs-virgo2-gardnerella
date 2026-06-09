@@ -1,0 +1,16 @@
+# MetaPhlAn 4 vJan25_CHOCOPhlAnSGB_202503 — Gardnerella SGB -> clade_name representative
+# Source: mpa_vJan25_CHOCOPhlAnSGB_202503_marker_info.txt.bz2 (Segata Lab), field s__<rep>|t__<SGB>
+# Extracted: 2026-06-08
+#SGB	clade_name_representative	additional_named_species_in_bin
+SGB17301	Gardnerella_vaginalis	(sp_KA00735)
+SGB17302	Gardnerella_vaginalis	(pure)
+SGB17305	Gardnerella_pickettii	vaginalis, piotii
+SGB17306	Gardnerella_vaginalis	(pure)
+SGB17307	Gardnerella_swidsinskii	leopoldii
+SGB17308	Gardnerella_vaginalis	(pure)
+SGB17309	Gardnerella_vaginalis	(greenwoodii)
+SGB17310	Gardnerella_vaginalis	(pure)
+SGB21500	Gardnerella_vaginalis	(sp_Marseille_Q2328)
+SGB33639	Gardnerella_SGB33639	(uSGB)
+SGB152030	Gardnerella_SGB152030	(uSGB)
+SGB152034	Gardnerella_SGB152034	(uSGB)

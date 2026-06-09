@@ -1,0 +1,6 @@
+# Large downloads produced by reproduce.sh (regenerable; not committed)
+sp
+*.bz2
+*.gz
+mi.txt
+virgo2*.txt

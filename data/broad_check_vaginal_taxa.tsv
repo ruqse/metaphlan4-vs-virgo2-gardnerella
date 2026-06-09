@@ -1,0 +1,22 @@
+# Broad check: 17 commonly studied vaginal taxa (examined here) vs MetaPhlAn 4 vJan25_CHOCOPhlAnSGB_202503 species index.
+# Read from mpa_vJan25_CHOCOPhlAnSGB_202503_species.txt (see reproduce.sh, step 1b). Extracted 8 June 2026.
+# verdict: "clean 1:1" = one species per SGB; "merged" = >1 named species in one SGB; "split" = one species across >1 SGB.
+# Tally: 8 affected (split / merged / both), 9 clean 1:1.
+taxon	SGB(s)	bin_composition	verdict
+Lactobacillus iners	SGB7025	iners	clean 1:1
+Lactobacillus jensenii	SGB7035	jensenii	clean 1:1
+Lactobacillus crispatus	SGB7045	crispatus + 4x Lactobacillus_sp_UMNPBX	merged
+Lactobacillus gasseri	SGB7038, SGB7039	7038: gasseri + paragasseri + sp_JM1 ; 7039: gasseri	split + merged
+Gardnerella (4 named species)	SGB17305, SGB17307, +7 more	17305: vaginalis + piotii + pickettii ; 17307: swidsinskii + leopoldii	split + merged
+Fannyhessea vaginae	SGB990, SGB991	both labelled F. vaginae	split
+Prevotella bivia	SGB1557	bivia	clean 1:1
+Prevotella amnii	SGB1558	amnii	clean 1:1
+Prevotella disiens	SGB1559	disiens	clean 1:1
+Sneathia vaginalis (BVAB1)	SGB6044	vaginalis + Sneathia_sp_DSM_16630 + Sneathia_sp_DSM_16631	merged
+Sneathia sanguinegens	SGB6045	sanguinegens	clean 1:1
+Megasphaera lornae	SGB5867	lornae + 2x Veillonellaceae_bacterium	merged
+Mobiluncus curtisii	SGB15487	curtisii + holmesii	merged
+Mobiluncus mulieris	SGB15486	mulieris	clean 1:1
+Ureaplasma parvum	SGB5568	parvum	clean 1:1
+Ureaplasma urealyticum	SGB5567	urealyticum	clean 1:1
+Streptococcus agalactiae	SGB8207, SGB8216	8207: hyovaginalis + acidominimus + agalactiae ; 8216: agalactiae + 10x Streptococcus_sp	split + merged

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+  <title id="title">Gardnerella Catalog Resolution Matrix</title>
+  <desc id="desc">Comparison of how MetaPhlAn 4 vJan25 SGBs and VIRGO2 represent four named Gardnerella species.</desc>
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .header { font: 700 27px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .species { font: italic 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .cell-title { font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
+      .cell-text { font: 400 21px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2937; }
+      .cell-note { font: 400 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5563; }
+      .legend { font: 400 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #374151; }
+      .footer { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6b7280; }
+      .row-line { stroke: #e5e7eb; stroke-width: 1; }
+      .column-rule { stroke: #eef2f7; stroke-width: 2; }
+      .resolved { fill: #edf8f1; stroke: #2fa25a; }
+      .merged { fill: #fff7dd; stroke: #f2a900; }
+      .hidden { fill: #fdeceb; stroke: #ef4444; }
+      .resolved-label { fill: #1f7a43; }
+      .merged-label { fill: #9a6700; }
+      .hidden-label { fill: #b42318; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="760"/>
+
+  <line class="column-rule" x1="430" y1="85" x2="430" y2="642"/>
+  <line class="column-rule" x1="1020" y1="85" x2="1020" y2="642"/>
+
+  <text class="header" x="250" y="60" text-anchor="middle">Gardnerella species</text>
+  <text class="header" x="725" y="60" text-anchor="middle">MetaPhlAn 4</text>
+  <text class="header" x="1260" y="60" text-anchor="middle">VIRGO2</text>
+
+  <line class="row-line" x1="90" y1="100" x2="1510" y2="100"/>
+  <line class="row-line" x1="90" y1="230" x2="1510" y2="230"/>
+  <line class="row-line" x1="90" y1="360" x2="1510" y2="360"/>
+  <line class="row-line" x1="90" y1="490" x2="1510" y2="490"/>
+  <line class="row-line" x1="90" y1="620" x2="1510" y2="620"/>
+
+  <text class="species" x="250" y="173" text-anchor="middle">G. vaginalis</text>
+  <rect class="merged" x="500" y="120" width="470" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title merged-label" x="535" y="153">MERGED</text>
+  <text class="cell-text" x="535" y="179">summed over 7 SGBs</text>
+  <text class="cell-note" x="535" y="202">printed as G. vaginalis</text>
+  <rect class="resolved" x="1080" y="120" width="440" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="1115" y="153">RESOLVED</text>
+  <text class="cell-text" x="1115" y="179">own species label</text>
+  <text class="cell-note" x="1115" y="202">plus sub-clades A-F,H</text>
+
+  <text class="species" x="250" y="303" text-anchor="middle">G. piotii</text>
+  <rect class="hidden" x="500" y="250" width="470" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title hidden-label" x="535" y="283">FOLDED</text>
+  <text class="cell-text" x="535" y="309">hidden in SGB17305</text>
+  <text class="cell-note" x="535" y="332">row prints as G. pickettii</text>
+  <rect class="resolved" x="1080" y="250" width="440" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="1115" y="283">RESOLVED</text>
+  <text class="cell-text" x="1115" y="309">own species label</text>
+  <text class="cell-note" x="1115" y="332">separable from G. vaginalis</text>
+
+  <text class="species" x="250" y="433" text-anchor="middle">G. leopoldii</text>
+  <rect class="hidden" x="500" y="380" width="470" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title hidden-label" x="535" y="413">FOLDED</text>
+  <text class="cell-text" x="535" y="439">hidden in SGB17307</text>
+  <text class="cell-note" x="535" y="462">row prints as G. swidsinskii</text>
+  <rect class="resolved" x="1080" y="380" width="440" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="1115" y="413">RESOLVED</text>
+  <text class="cell-text" x="1115" y="439">own species label</text>
+  <text class="cell-note" x="1115" y="462">separable from G. swidsinskii</text>
+
+  <text class="species" x="250" y="563" text-anchor="middle">G. swidsinskii</text>
+  <rect class="merged" x="500" y="510" width="470" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title merged-label" x="535" y="543">MERGED</text>
+  <text class="cell-text" x="535" y="569">SGB17307 composite bin</text>
+  <text class="cell-note" x="535" y="592">includes G. leopoldii</text>
+  <rect class="resolved" x="1080" y="510" width="440" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="1115" y="543">RESOLVED</text>
+  <text class="cell-text" x="1115" y="569">own species label</text>
+  <text class="cell-note" x="1115" y="592">separable named species</text>
+
+  <rect class="resolved" x="395" y="670" width="34" height="22" rx="3" stroke-width="2"/>
+  <text class="legend" x="448" y="687">resolved as its own species</text>
+  <rect class="merged" x="690" y="670" width="34" height="22" rx="3" stroke-width="2"/>
+  <text class="legend" x="743" y="687">present only as merged or summed bin</text>
+  <rect class="hidden" x="1070" y="670" width="34" height="22" rx="3" stroke-width="2"/>
+  <text class="legend" x="1123" y="687">folded into another printed row</text>
+
+  <text class="footer" x="800" y="735" text-anchor="middle">MetaPhlAn 4 vJan25_CHOCOPhlAnSGB_202503 vs VIRGO2 (France et al. 2025). Database-content analysis; not a per-read benchmark.</text>
+</svg>
