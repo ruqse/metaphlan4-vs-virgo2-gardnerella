@@ -2,9 +2,13 @@
 
 *A database-content comparison of MetaPhlAn 4 (vJan25_CHOCOPhlAnSGB_202503) and VIRGO2 for the vaginal pathobiont* Gardnerella. *Faruk Dube, 8 June 2026.*
 
-## Why this matters
+## Visual summary
 
-The genus *Gardnerella* is central to bacterial vaginosis, which affects roughly a third of reproductive-age women (Bradshaw, C.S., et al. 2025), and contains several species that differ in their associations with disease (Hill and Albert 2019). Researchers increasingly profile these species with shotgun metagenomic tools. I show that MetaPhlAn 4, a widely used profiler, cannot resolve the four named *Gardnerella* species, whereas the vaginal-curated catalog VIRGO2 can. The reference a study chooses therefore decides whether the species-level *Gardnerella* signal survives or is lost before any analysis begins.
+The four named species fare differently in each tool:
+
+![How MetaPhlAn 4 and VIRGO2 each handle the four named Gardnerella species: MetaPhlAn merges them into composite bins, VIRGO2 resolves all four](figures/gardnerella_catalog_resolution_matrix.png)
+
+MetaPhlAn yields one summed *vaginalis* row plus two composite rows (`pickettii`, `swidsinskii`), and it drops *piotii* and *leopoldii* from the species column. VIRGO2 keeps all four separate.
 
 ## Summary
 
@@ -14,6 +18,10 @@ The genus *Gardnerella* is central to bacterial vaginosis, which affects roughly
 - The behaviour is a property of the reference database and is fixed before any sample is sequenced. The same merging and splitting affects eight of seventeen commonly studied vaginal taxa examined here, not *Gardnerella* alone.
 
 This is a database-content analysis of what each catalog can represent. It is not a per-read profiling benchmark, so it answers whether each catalog can represent the four species but does not quantify either tool's read-level accuracy.
+
+## Why this matters
+
+The genus *Gardnerella* is central to bacterial vaginosis, which affects roughly a third of reproductive-age women (Bradshaw, C.S., et al. 2025), and contains several species that differ in their associations with disease (Hill and Albert 2019). Researchers increasingly profile these species with shotgun metagenomic tools. I show that MetaPhlAn 4, a widely used profiler, cannot resolve the four named *Gardnerella* species, whereas the vaginal-curated catalog VIRGO2 can. The reference a study chooses therefore decides whether the species-level *Gardnerella* signal survives or is lost before any analysis begins.
 
 ## Background
 
@@ -46,15 +54,6 @@ At most three named *Gardnerella* labels can appear: `vaginalis` (dominant, summ
 ### What VIRGO2 carries
 
 VIRGO2 carries four named species, seven *G. vaginalis* sub-clades (A, B, C, D, E, F, H), four unnamed or novel genomospecies, and one genus fallback, for sixteen labels. Each named species is separable, including *piotii*, which is the single most gene-rich *Gardnerella* label in the catalog.
-
-### Visual summary
-
-The four named species fare differently in each tool:
-
-![How MetaPhlAn 4 and VIRGO2 each handle the four named Gardnerella species: MetaPhlAn merges them into composite bins, VIRGO2 resolves all four](figures/gardnerella_catalog_resolution_matrix.png)
-
-MetaPhlAn yields one summed *vaginalis* row plus two composite rows (`pickettii`, `swidsinskii`), and it drops *piotii* and *leopoldii* from the species column. VIRGO2 keeps all four separate.
-
 
 ## Why the disparity arises
 
@@ -100,15 +99,23 @@ gzip -dc virgo2_taxon.txt.gz | awk -F'\t' '$3 ~ /Gardnerella/ {print $3}' | sort
 
 All three commands were run against fresh downloads on 8 June 2026 and reproduced the outputs above.
 
+## License
+
+Code and scripts in this repository are licensed under the MIT License; see [`LICENSE`](LICENSE).
+
+Original written analysis, figures, diagrams, and report content are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0); see [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md).
+
+Small committed files under [`data/`](data/) are reproducibility outputs derived from upstream MetaPhlAn 4 and VIRGO2 catalog files. They are included to document the database-content checks, but upstream database and software terms still apply; see [`NOTICE.md`](NOTICE.md).
+
 ## References
 
-- France MT, et al. VIRGO2: an enhanced gene catalog of the vaginal microbiome. *Nature Communications* 2025. DOI 10.1038/s41467-025-67136-2
 - Blanco-Míguez A, et al. Extending and improving metagenomic taxonomic profiling with uncharacterized species using MetaPhlAn 4. *Nature Biotechnology* 2023;41(11):1633-1644. DOI 10.1038/s41587-023-01688-w. PMID 36823356
-- Pasolli E, et al. Extensive unexplored human microbiome diversity revealed by over 150,000 genomes from metagenomes. *Cell* 2019;176(3):649-662. DOI 10.1016/j.cell.2019.01.001. PMID 30661755
-- Vaneechoutte M, et al. Description of *Gardnerella leopoldii*, *G. piotii*, and *G. swidsinskii*. *Int J Syst Evol Microbiol* 2019;69(3):679-687. DOI 10.1099/ijsem.0.003200. PMID 30648938
+- Bradshaw, C.S., et al., Bacterial vaginosis. Nat Rev Dis Primers, 2025. 11(1): p. 43. PMID 40537474
+- France MT, et al. VIRGO2: an enhanced gene catalog of the vaginal microbiome. *Nature Communications* 2025. DOI 10.1038/s41467-025-67136-2
+- Goris J, et al. DNA-DNA hybridization values and their relationship to whole-genome sequence similarities. *Int J Syst Evol Microbiol* 2007;57(1):81-91. DOI 10.1099/ijs.0.64483-0. PMID 17220447
 - Hill JE, Albert AYK. Resolution and cooccurrence patterns of the four *Gardnerella* species. *Infection and Immunity* 2019;87(12):e00532-19. DOI 10.1128/IAI.00532-19. PMID 31527125
 - Holm JB, et al. Integrating compositional and functional content to describe vaginal microbiomes in health and disease. *Microbiome* 2023;11:259. DOI 10.1186/s40168-023-01692-x. PMID 38031142
-- Bradshaw, C.S., et al., Bacterial vaginosis. Nat Rev Dis Primers, 2025. 11(1): p. 43. PMID 40537474
-- Goris J, et al. DNA-DNA hybridization values and their relationship to whole-genome sequence similarities. *Int J Syst Evol Microbiol* 2007;57(1):81-91. DOI 10.1099/ijs.0.64483-0. PMID 17220447
-- Richter M, Rosselló-Móra R. Shifting the genomic gold standard for the prokaryotic species definition. *PNAS* 2009;106(45):19126-19131. DOI 10.1073/pnas.0906412106. PMID 19855009
 - MetaPhlAn 4 output format (`additional_species` column): biobakery MetaPhlAn 4 tutorial. https://github.com/biobakery/biobakery/wiki/metaphlan4
+- Pasolli E, et al. Extensive unexplored human microbiome diversity revealed by over 150,000 genomes from metagenomes. *Cell* 2019;176(3):649-662. DOI 10.1016/j.cell.2019.01.001. PMID 30661755
+- Richter M, Rosselló-Móra R. Shifting the genomic gold standard for the prokaryotic species definition. *PNAS* 2009;106(45):19126-19131. DOI 10.1073/pnas.0906412106. PMID 19855009
+- Vaneechoutte M, et al. Description of *Gardnerella leopoldii*, *G. piotii*, and *G. swidsinskii*. *Int J Syst Evol Microbiol* 2019;69(3):679-687. DOI 10.1099/ijsem.0.003200. PMID 30648938
