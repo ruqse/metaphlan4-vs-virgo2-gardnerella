@@ -20,6 +20,13 @@ Upstream sources used by the reproducibility workflow:
   bioBakery/MetaPhlAn project.
 - VIRGO2 taxonomic annotation table distributed by the Ravel Lab VIRGO2
   project.
+- VMGC Supplementary Table S6 (GTDB r214.1 species roster), from Huang et al.
+  2024, *Nature Microbiology*, DOI 10.1038/s41564-024-01751-5. Used only to read
+  the ex-Gardnerella (GTDB *Bifidobacterium*) species counts in
+  `data/gardnerella_gtdb_catalogs.tsv`.
+- GVMG Supplementary Table S7 (GTDB R220 species roster), from Jie et al. 2026,
+  *Nature Genetics*, DOI 10.1038/s41588-026-02639-2. Used only to read the
+  ex-Gardnerella species counts in `data/gardnerella_gtdb_catalogs.tsv`.
 
 The repository's licenses apply only to material that Faruk Dube has the right
 to license. They do not imply endorsement by MetaPhlAn, bioBakery, VIRGO2, the

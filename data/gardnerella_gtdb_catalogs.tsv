@@ -1,0 +1,22 @@
+# Gardnerella across four references: database-content resolution of the four named species.
+# Extends the MetaPhlAn 4 vs VIRGO2 comparison (this repo) to two GTDB-based vaginal genome catalogs.
+# Verified 12 June 2026 by reading the upstream species rosters directly:
+#   MetaPhlAn 4 vJan25_CHOCOPhlAnSGB_202503  marker_info.txt           (Blanco-Miguez et al. 2023; NCBI naming)
+#   VIRGO2     1.VIRGO2.taxon.txt                                       (France et al. 2025;        NCBI naming)
+#   VMGC       Supplementary Table S6, GTDB r214.1                      (Huang et al. 2024; 41564_2024_1751_MOESM4_ESM.xlsx, sheet Tab.S6; genus col 10, species col 11)
+#   GVMG       Supplementary Table S7, GTDB R220                        (Jie  et al. 2026; 41588_2026_2639_MOESM4_ESM.xlsx, sheet S7;     genus col 15, species col 16)
+# naming_authority: MetaPhlAn 4 and VIRGO2 use NCBI Gardnerella; VMGC and GVMG use GTDB, which folds Gardnerella into
+#   Bifidobacterium ("B. vaginale genomospecies"). Match on the species EPITHET, not the genus.
+# vmgc/gvmg counts = number of DISTINCT SGBs carrying that GTDB species label (95% ANI bins). metaphlan/virgo2 = separable at the label level (Y/N).
+# Caveat: GVMG incorporated ~5,600 VMGC-compiled genomes (Jie et al. 2026, Results), so VMGC<->GVMG agreement is reference concordance, not independent replication.
+# Caveat: counts are anchored to these GTDB releases (VMGC r214.1, GVMG R220); a later release could regroup the SGBs.
+ncbi_species	gtdb_species	metaphlan4_vJan25	virgo2	vmgc_r214.1_sgbs	gvmg_r220_sgbs
+Gardnerella vaginalis	Bifidobacterium vaginale	composite/summed: 7 SGBs print G. vaginalis, also co-binned in composite SGB17305	separable (+ sub-clades)	18	8
+Gardnerella piotii	Bifidobacterium piotii	not at species column: inside composite SGB17305 (printed G. pickettii)	separable	4	1
+Gardnerella leopoldii	Bifidobacterium leopoldii	not at species column: inside composite SGB17307 (printed G. swidsinskii)	separable	3	0
+Gardnerella swidsinskii	Bifidobacterium swidsinskii	composite SGB17307: merged with leopoldii	separable	3	1
+# G. vaginalis sub-clade letters per catalog (verified from the rosters above):
+#   VIRGO2      = A B C D E F H        (no G)
+#   VMGC r214.1 = A B C D _ F H        (no E, no G)
+#   GVMG R220   = A B _ D E F H I      (no C, no G; adds I)
+# The letters are NOT portable: a sub-clade label in one catalog cannot be equated with the same letter in another.
