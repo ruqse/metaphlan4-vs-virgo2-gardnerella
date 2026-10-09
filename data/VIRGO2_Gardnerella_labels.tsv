@@ -1,0 +1,21 @@
+# VIRGO2 Gardnerella taxon labels and the number of non-redundant genes carrying each (1.VIRGO2.taxon.txt, column Taxa).
+# VIRGO2 assigned taxonomy with GTDB-Tk (GTDB release 207) and renamed Bifidobacterium back to Gardnerella (France et al. 2025, Methods).
+# Suffixed labels (vaginalis_A ... _H) and spNNNNNNNNN labels are therefore GTDB species clusters, not sub-clades of G. vaginalis.
+# France et al. 2025 describe these as 15 recognized Gardnerella species; the genus-only label 'Gardnerella' is the 16th label.
+label	n_genes	level
+Gardnerella_piotii	13116	species
+Gardnerella_vaginalis	11806	species
+Gardnerella_vaginalis_F	9182	species
+Gardnerella_vaginalis_H	7331	species
+Gardnerella_vaginalis_C	7155	species
+Gardnerella	6709	genus
+Gardnerella_vaginalis_A	5091	species
+Gardnerella_vaginalis_D	4868	species
+Gardnerella_sp003585735	4475	species
+Gardnerella_vaginalis_B	3892	species
+Gardnerella_swidsinskii	3820	species
+Gardnerella_sp003585845	3761	species
+Gardnerella_leopoldii	2939	species
+Gardnerella_vaginalis_E	2496	species
+Gardnerella_spNov2	2486	species
+Gardnerella_spNov1	1557	species

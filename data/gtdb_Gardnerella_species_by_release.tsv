@@ -1,0 +1,62 @@
+# GTDB species of every genome GTDB assigns to a Gardnerella-derived species, in releases 207, 220 and 226 (bac120_taxonomy_r*.tsv.gz).
+# One row per release-to-release path; n_genomes = genomes following that path. A suffix letter is a placeholder:
+# GTDB states a suffix is kept between releases on a best-effort basis but 'this is not guaranteed'.
+# B. vaginale_<letter> sets used by each catalog (letters alone do not identify the same cluster across GTDB releases):
+#   VIRGO2 (GTDB r207)      A B C D E F H
+#   VMGC   (GTDB r214.1)    A B C D F H
+#   GVMG   (GTDB R220)      A B D E F H I
+gtdb_r207	gtdb_r220	gtdb_r226	n_genomes
+B. leopoldii	B. leopoldii	B. leopoldii	6
+not in release	B. leopoldii	B. leopoldii	9
+not in release	B. leopoldii	not in release	4
+B. piotii	B. piotii	B. piotii	16
+not in release	B. piotii	B. piotii	23
+B. piotii	B. piotii	B. sp947252975	3
+not in release	B. piotii	B. sp947252975	2
+not in release	B. piotii	not in release	2
+B. sp003585735	B. sp003585735	B. sp003585735	1
+not in release	B. sp003585735	B. sp003585735	1
+B. sp003585735	B. sp003585735	not in release	1
+B. sp003585845	B. sp003585845	B. sp003585845	1
+not in release	B. sp003585845	B. sp003585845	3
+not in release	B. sp946891915	B. sp946891915	2
+not in release	B. sp947292085	B. sp947292085	1
+B. swidsinskii	B. swidsinskii	B. swidsinskii	7
+not in release	B. swidsinskii	B. swidsinskii	18
+not in release	B. swidsinskii	not in release	5
+B. vaginale	B. vaginale	B. vaginale	45
+not in release	B. vaginale	B. vaginale	25
+B. vaginale	B. vaginale	B. vaginale_C	5
+not in release	B. vaginale	B. vaginale_C	1
+not in release	B. vaginale	not in release	2
+B. vaginale_A	B. vaginale_A	B. vaginale_A	2
+not in release	B. vaginale_A	B. vaginale_A	8
+B. vaginale_B	B. vaginale_B	B. vaginale_B	1
+not in release	B. vaginale_B	B. vaginale_B	4
+B. vaginale_C	B. vaginale_C	B. greenwoodii	4
+B. vaginale_E	B. vaginale_C	B. greenwoodii	1
+not in release	B. vaginale_C	B. greenwoodii	5
+B. vaginale_D	B. vaginale_D	B. vaginale_D	3
+not in release	B. vaginale_D	B. vaginale_D	1
+B. vaginale_C	B. vaginale_E	B. greenwoodii	1
+B. vaginale_E	B. vaginale_E	B. greenwoodii	1
+B. vaginale_E	B. vaginale_E	B. vaginale_E	2
+not in release	B. vaginale_E	B. vaginale_E	6
+B. vaginale_F	B. vaginale_F	B. vaginale_F	1
+not in release	B. vaginale_F	B. vaginale_F	5
+B. vaginale_H	B. vaginale_H	B. vaginale_H	1
+not in release	B. vaginale_H	B. vaginale_H	6
+not in release	B. vaginale_H	not in release	1
+not in release	B. vaginale_I	B. vaginale_I	3
+not in release	not in release	B. greenwoodii	1
+B. leopoldii	not in release	B. leopoldii	4
+not in release	not in release	B. piotii	6
+not in release	not in release	B. sp003585735	1
+B. swidsinskii	not in release	B. swidsinskii	3
+not in release	not in release	B. swidsinskii	6
+not in release	not in release	B. vaginale	8
+not in release	not in release	B. vaginale_C	1
+not in release	not in release	B. vaginale_H	2
+B. leopoldii	not in release	not in release	6
+B. piotii	not in release	not in release	8
+B. swidsinskii	not in release	not in release	8

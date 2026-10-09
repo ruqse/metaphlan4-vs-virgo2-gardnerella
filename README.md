@@ -1,145 +1,160 @@
-# MetaPhlAn 4 cannot resolve the four named *Gardnerella* species, and its printed species names are genome-bin labels rather than species calls; VIRGO2 resolves all four
+# MetaPhlAn 4 reports neither *G. piotii* nor *G. leopoldii*; VIRGO2 labels both
 
-*A database-content comparison of MetaPhlAn 4 (vJan25_CHOCOPhlAnSGB_202503) and VIRGO2 for the vaginal genus* Gardnerella. *Faruk Dube, 8 June 2026.*
+*MetaPhlAn 4 co-bins* G. piotii *with* G. pickettii *and* G. swidsinskii *with* G. leopoldii, *and its* G. vaginalis *row aggregates seven GTDB species clusters. A database-content comparison of MetaPhlAn 4 (vJan25_CHOCOPhlAnSGB_202503, replicated on vJan26), VIRGO2, VMGC and GVMG. Faruk Dube, 8 June 2026; revised 9 October 2026 (see [Changelog](#changelog)).*
 
-## Visual summary
-
-The four named species fare differently in each tool:
-
-![How MetaPhlAn 4 and VIRGO2 each handle the four named Gardnerella species: MetaPhlAn merges them into composite bins, VIRGO2 resolves all four](figures/gardnerella_catalog_resolution_matrix.png)
-
-MetaPhlAn yields one summed *vaginalis* row plus two composite rows (`pickettii`, `swidsinskii`), and it drops *piotii* and *leopoldii* from the species column. VIRGO2 keeps all four separate.
+![How MetaPhlAn 4 and VIRGO2 represent the four Gardnerella species of Vaneechoutte et al. 2019](figures/gardnerella_catalog_resolution_matrix.png)
 
 ## Summary
 
-- MetaPhlAn 4 (vJan25) does not resolve the four named *Gardnerella* species (*vaginalis*, *piotii*, *leopoldii*, *swidsinskii*; Vaneechoutte et al. 2019). It collapses them into two of its twelve *Gardnerella* genome bins, while *G. vaginalis* is additionally fragmented across seven more.
-- The species names MetaPhlAn prints for the genus do not correspond to single species. A `G. pickettii` row is a *vaginalis* plus *piotii* plus *pickettii* bin, and a `G. swidsinskii` row is a *swidsinskii* plus *leopoldii* bin. *G. piotii* and *G. leopoldii* never reach the species column.
-- VIRGO2 resolves all four species and adds seven *G. vaginalis* sub-clades, for sixteen distinct *Gardnerella* labels, because it is curated for the vaginal niche.
-- The behaviour is a property of the reference database and is fixed before any sample is sequenced. The same merging and splitting affects eight of seventeen commonly studied vaginal taxa examined here, not *Gardnerella* alone.
-
-This is a database-content analysis of what each catalog can represent. It is not a per-read profiling benchmark, so it answers whether each catalog can represent the four species but does not quantify either tool's read-level accuracy.
+- MetaPhlAn 4's 12 *Gardnerella* SGBs map to 12 GTDB species, but its printed names resolve less:
+  - SGB17305 (*pickettii*, *piotii*, *vaginalis* labels) prints as `G. pickettii`.
+  - SGB17307 (*swidsinskii*, *leopoldii*) prints as `G. swidsinskii`.
+  - `G. vaginalis` sums seven SGBs that are seven GTDB species.
+- VIRGO2 has 15 species-level labels, with separate *piotii*, *swidsinskii* and *leopoldii*.
+- Not every limit is MetaPhlAn's: GTDB places the *G. pickettii* type genome inside *B. piotii*, so no GTDB-based reference here labels *pickettii*, and GVMG also merges *leopoldii* into *swidsinskii*.
+- These are database properties, fixed before sequencing. This compares database contents, not read-level accuracy.
 
 ## Why this matters
 
-The genus *Gardnerella* is central to bacterial vaginosis, which affects roughly a third of reproductive-age women (Bradshaw, C.S., et al. 2025), and contains several species that differ in their associations with disease (Hill and Albert 2019). Researchers increasingly profile these species with shotgun metagenomic tools. I show that MetaPhlAn 4, a widely used profiler, cannot resolve the four named *Gardnerella* species, whereas the vaginal-curated catalog VIRGO2 can. The reference a study chooses therefore decides whether the species-level *Gardnerella* signal survives or is lost before any analysis begins.
+Bacterial vaginosis affects one in four women globally (Bradshaw et al. 2025). *Gardnerella* species can differ clinically: in 413 reproductive-aged Canadian women, *G. vaginalis* and *G. swidsinskii* abundance was associated with abnormal odour and discharge (Hill and Albert 2019). Whether a shotgun profile carries that signal depends on the reference.
 
 ## Background
 
-MetaPhlAn 4 is a marker-gene taxonomic profiler (Blanco-Míguez et al. 2023). The unit it quantifies is the species-level genome bin (SGB), a cluster of reference genomes and metagenome-assembled genomes grouped at roughly 5% genome-wide distance (Pasolli et al. 2019). That distance approximates the conventional 95% average nucleotide identity species boundary (Goris 2007; Richter and Rosselló-Móra 2009). The genomes come from all body sites and are not curated for the vagina. Two mismatches with formal taxonomy follow. Named species closer than the threshold merge into one SGB, and a single diverse species fragments across several SGBs.
+**Nomenclature.** Vaneechoutte et al. (2019) described *G. leopoldii*, *G. piotii* and *G. swidsinskii* alongside *G. vaginalis*. LPSN now lists ten species (Sousa et al. 2023; Allini Ntiguemassa et al. 2026) under the correct genus *Gardnerella*; GTDB places them in *Bifidobacterium*. This analysis follows the 2019 four; [`data/gardnerella_named_species_crosswalk.tsv`](data/gardnerella_named_species_crosswalk.tsv) traces all ten by type-strain genome.
 
-When an SGB contains several named species, MetaPhlAn prints one representative species in the `clade_name` column and lists the rest in an `additional_species` column, where they share the representative's abundance rather than receiving their own (biobakery MetaPhlAn 4 tutorial). The standard merge step (`merge_metaphlan_tables.py`) keys on `clade_name` and produces a clade-by-sample abundance matrix, so the `additional_species` field is not carried through.
+**MetaPhlAn 4** quantifies species-level genome bins (SGBs): isolate genomes and MAGs clustered at 5% genetic distance (Pasolli et al. 2019; Blanco-Míguez et al. 2023), roughly the 95% ANI species boundary (Goris et al. 2007; Richter and Rosselló-Móra 2009). Each SGB prints one representative name in `clade_name`; other species in the bin share its abundance in `additional_species` (biobakery MetaPhlAn 4 tutorial), which `merge_metaphlan_tables.py` drops. SGBs with the same representative name are summed into one `s__` row.
 
-VIRGO2 is not an SGB profiler (France et al. 2025). It is a vaginal-curated non-redundant gene catalog of 1,773,155 genes built from 2,560 metagenomes and 4,013 isolate genomes, in which each gene carries a curated taxonomic label at named-species and sub-species level.
+**VIRGO2** is a catalog of 1,773,155 non-redundant genes from 2,560 metagenomes (2,496 vaginal, 64 penile urethral) and 4,013 isolate genomes (France et al. 2025). Its gene taxonomy comes from GTDB-Tk (release 207), with *Bifidobacterium* renamed back to *Gardnerella*. GTDB species are ANI clusters, each defined by one representative genome (Parks et al. 2020).
 
-## The finding
+## MetaPhlAn 4: what each SGB prints
 
-| Catalog | Distinct *Gardnerella* labels | Four named species separable |
-|---|---:|---|
-| MetaPhlAn 4 vJan25 | 12 SGBs | No: collapsed into 2 SGBs |
-| VIRGO2 | 16 taxon labels | Yes: all four plus 7 *G. vaginalis* sub-clades (A to H, no G) |
+| SGB | Printed `clade_name` | Named labels in the SGB | GTDB r220 (MetaPhlAn map) |
+|---|---|---|---|
+| 17301, 17302, 17306, 17308, 17309, 17310, 21500 | `G. vaginalis`, summed into one row | *vaginalis*; also *greenwoodii* (17309) and the *G. massiliensis* type strain, `Gardnerella_sp_Marseille_Q2328` (21500) | *B. vaginale*_A, *B. vaginale*, _B, _D, _E, _F, _H |
+| **17305** | `G. pickettii` | *pickettii*, *vaginalis*, *piotii* | *B. vaginale*_I |
+| **17307** | `G. swidsinskii` | *swidsinskii*, *leopoldii* | *B.* sp003585845 |
+| 33639, 152030, 152034 | `G. SGBxxxxx` | none (MAG-only uSGBs) | *B.* sp003585735, sp946891915, sp947292085 |
 
-### What MetaPhlAn 4 prints per SGB
+Source: [`data/mpa_Gardnerella_SGB_crosswalk.tsv`](data/mpa_Gardnerella_SGB_crosswalk.tsv), built from `marker_info.txt`, `species.txt` and MetaPhlAn's `SGB2GTDB_r220` table.
 
-I read the representative species directly from the MetaPhlAn marker database (`marker_info.txt`, field `s__<rep>|t__<SGB>`):
+- **Labels are NCBI names of member genomes.** Many were deposited as "*G. vaginalis*" before 2019, so the *vaginalis* label in SGB17305 does not place the type-strain lineage there. Whether the aggregated `G. vaginalis` row over- or under-states *G. vaginalis* is not established.
+- **vJan26** (current `mpa_latest`) has the same 12 SGBs, labels and printed names; its r226 map differs only at SGB17302 (*B. vaginale* → *B. vaginale*_C).
+- **`sgb_to_gtdb_profile.py`** sums SGBs per GTDB species, so it reports *B. vaginale*_I and *B.* sp003585845 and never *B. piotii*, *B. swidsinskii* or *B. leopoldii*.
 
-| SGB(s) | `clade_name` printed | What the bin actually contains |
+## VIRGO2: what it labels
+
+VIRGO2 has 16 *Gardnerella* labels ([`data/VIRGO2_Gardnerella_labels.tsv`](data/VIRGO2_Gardnerella_labels.tsv)):
+- Four named species: *piotii* (the most genes of any label, 13,116), *vaginalis*, *swidsinskii* and *leopoldii*.
+- Seven GTDB suffix clusters, `vaginalis_A`–`_F` and `_H`. These are species clusters with placeholder names, not sub-clades.
+- Two GTDB placeholders (`sp003585735`, `sp003585845`) and two novel species (`spNov1`, `spNov2`).
+- The genus-only label `Gardnerella`.
+
+It has no *pickettii* label, because GTDB places that type genome in *B. piotii* (r220, r226).
+
+It has no *greenwoodii* label either, because that species postdates GTDB r207. All five r207 *B. vaginale*_C genomes are *B. greenwoodii* in r226 ([`data/gtdb_Gardnerella_species_by_release.tsv`](data/gtdb_Gardnerella_species_by_release.tsv)), so VIRGO2's `vaginalis_C` is the *greenwoodii* lineage.
+
+## Why the methods disagree
+
+MetaPhlAn clusters all genomes at 5% distance, and its authors note this merges some species originally labelled as separate (Blanco-Míguez et al. 2023). GTDB delimits species by ANI around one representative genome (Parks et al. 2020). Named species near 95% ANI therefore fall differently under the two rules.
+
+*G. leopoldii* and *G. swidsinskii* are such a pair. VMGC Table S6 lists each type genome as a ≥95% ANI reference for the other species' SGBs.
+
+None of this is a MetaPhlAn defect: the printed name is the bin's representative by design. The problem is reading named-species *Gardnerella* abundances from the `s__` column.
+
+## Beyond *Gardnerella*
+
+Of 17 commonly studied vaginal taxa in the same species index, 4 share an SGB with another named species ([`data/broad_check_vaginal_taxa.tsv`](data/broad_check_vaginal_taxa.tsv)):
+
+| Category | Meaning | Taxa |
 |---|---|---|
-| 17301, 17302, 17306, 17308, 17309, 17310, 21500 | `G. vaginalis` (7 SGBs, summed into one row) | *vaginalis* (plus strains, *greenwoodii*, unnamed sp) |
-| **17305** | `G. pickettii` | *vaginalis* plus *piotii* plus *pickettii* |
-| **17307** | `G. swidsinskii` | *swidsinskii* plus *leopoldii* |
-| 33639, 152030, 152034 | `G. SGBxxxxx` (unnamed uSGB) | metagenome-assembled genomes only |
+| A | One SGB, no other label | *L. iners*, *L. jensenii*, *P. bivia*, *P. amnii*, *P. disiens*, *S. sanguinegens*, *M. mulieris*, *U. parvum*, *U. urealyticum* |
+| B | One SGB, shared only with unnamed genomes | *L. crispatus*, *Sneathia vaginalis* (BVAB1), *Megasphaera lornae* |
+| C | One SGB, shared with another named species | *Mobiluncus curtisii* (+ *M. holmesii*) |
+| D | Split across SGBs | *Fannyhessea vaginae* |
+| E | Split, and sharing an SGB with another named species | *L. gasseri* (+ *L. paragasseri*), *Gardnerella*, *Streptococcus agalactiae* (+ *S. hyovaginalis*, *S. acidominimus*) |
 
-At most three named *Gardnerella* labels can appear: `vaginalis` (dominant, summed over seven SGBs) and the two composite labels `pickettii` and `swidsinskii`. *G. piotii* and *G. leopoldii* are unreachable at the species column.
+B and D do not mix named species in one `s__` row. D's SGBs are summed under one name.
 
-### What VIRGO2 carries
+## GTDB genome catalogs: VMGC and GVMG
 
-VIRGO2 carries four named species, seven *G. vaginalis* sub-clades (A, B, C, D, E, F, H), four unnamed or novel genomospecies, and one genus fallback, for sixteen labels. Each named species is separable, including *piotii*, which is the single most gene-rich *Gardnerella* label in the catalog.
+VMGC (Huang et al. 2024; GTDB r214.1) and GVMG (Jie et al. 2026; GTDB R220) are genome collections profiled with a general classifier such as Kraken2. Their genome rosters (VMGC Table S6; GVMG Tables S4, S7, S20) give:
 
-## Why the disparity arises
+| Catalog | *piotii* | *leopoldii* | *swidsinskii* | *vaginale* (plain + suffixed) |
+|---|---|---|---|---|
+| VMGC r214.1 | 4 SGBs | 3 SGBs | 3 SGBs | 5 + 13 |
+| GVMG R220 | 1 SGB | none labelled | 1 SGB (SGB865) | 1 + 7 |
 
-Three factors combine. First, seven SGBs print as `G. vaginalis` and sum into one inflated row. Second, the reference is *vaginalis*-heavy: SGBs are clustered at roughly 5% genome distance from a non-vaginal genome collection in which *vaginalis* dominates the genus (seven of the twelve *Gardnerella* SGBs carry the *vaginalis* label), so *Gardnerella* sister species within that distance merge and the diverse *G. vaginalis* fragments. Third, the output mechanics hide the rest: co-binned species sit in `additional_species`, share the representative's abundance, and are usually discarded downstream.
+**GVMG merges *G. leopoldii* into *G. swidsinskii*.** Table S4 places the *G. leopoldii* type genome (GCF_003293675.1) in SGB865. In Table S20, two of VMGC's three *B. leopoldii* SGBs match SGB865 best (96.1%, 95.7% ANI) and the third matches SGB872, *B.* sp003585845 (95.8%). GTDB keeps the two type genomes apart in r207, r220 and r226.
 
-The contrast with VIRGO2 explains the disparity: VIRGO2 labels genes by curated vaginal taxonomy rather than by genome-distance bins, so the four species stay separate.
+**Suffix letters are not stable identifiers.** The `vaginale` letters differ by catalog (VIRGO2 A–F, H; VMGC A–D, F, H; GVMG A, B, D–F, H, I). Every r220 *B. vaginale*_C genome became *B. greenwoodii* in r226, while r226's `_C` holds former unsuffixed *B. vaginale* genomes; GTDB says suffix retention "is not guaranteed" (GTDB FAQ). Placeholders such as *B.* sp003585845 have no epithet to match at all.
 
-None of this is a defect in MetaPhlAn 4. SGBs are a deliberate design for broad, cross-body-site profiling, including of uncharacterized species, and the printed name is the bin's representative species by construction. The limitation is one of scope: reading species-level vaginal *Gardnerella* from a reference that is neither vaginal-curated nor keyed to named species.
+**Kraken scope.** GVMG's distributed Kraken database covers 746 of its 890 SGBs (35,915 genomes; Jie et al. 2026, Methods), including the three SGBs holding the four 2019 type genomes (Table S4).
 
-## The pattern is not specific to *Gardnerella*
-
-Of 17 commonly studied vaginal taxa examined here, eight are split, merged, or both in MetaPhlAn 4 vJan25. The affected set includes bacterial-vaginosis-relevant organisms: *Sneathia vaginalis* (BVAB1), which merges with environmental *Sneathia*; *Megasphaera lornae*, which merges with two *Veillonellaceae*; *Mobiluncus curtisii*, which merges with *M. holmesii*; *Streptococcus agalactiae*, which splits and merges; and the protective species *Lactobacillus crispatus* and *Lactobacillus gasseri*. *Fannyhessea vaginae* splits across two SGBs. Nine taxa are clean one-to-one: *L. iners*, *L. jensenii*, *Prevotella bivia*, *P. amnii*, *P. disiens*, *S. sanguinegens*, *M. mulieris*, *Ureaplasma parvum*, and *U. urealyticum*. Each call was read from the same species index; the per-taxon result is in [`data/broad_check_vaginal_taxa.tsv`](data/broad_check_vaginal_taxa.tsv), regenerated by `reproduce.sh` (step 1b).
-
-## Two GTDB genome catalogs (VMGC, GVMG) resolve the species, but rename the genus and disagree on sub-clades
-
-*Addendum, 12 June 2026.*
-
-MetaPhlAn 4 and VIRGO2 are not the only options. Two vaginal-curated genome collections also represent the genus: VMGC (Huang et al. 2024; GTDB r214.1) and the newer GVMG (Jie et al. 2026; GTDB R220). Each is a reference-genome database rather than a self-contained profiler: a sample is profiled by running a general-purpose classifier (Kraken2, with Bracken for abundance estimation) against the collection, whereas MetaPhlAn bundles its own profiler and database. Whether a catalog can represent the four named species is a property of its genome roster, independent of the profiler run over it, and that roster is what I read below. Both improve markedly on MetaPhlAn's handling of the genus (VMGC carries all four named species, GVMG three of the four), which reinforces the recommendation to use a vaginal-curated reference. But they add two complications a MetaPhlAn-versus-VIRGO2 comparison cannot see, both read directly from the upstream species rosters (VMGC Supplementary Table S6; GVMG Supplementary Table S7) and recorded in [`data/gardnerella_gtdb_catalogs.tsv`](data/gardnerella_gtdb_catalogs.tsv).
-
-First, GTDB reclassifies the whole genus into *Bifidobacterium*, so the four species appear as *B. vaginale* (= *G. vaginalis*), *B. piotii*, *B. leopoldii*, and *B. swidsinskii*, unified as the "*B. vaginale* genomospecies". A pipeline that string-matches *Gardnerella* silently drops every one of them. The match must be made on the species epithet, not the genus, because GTDB *Bifidobacterium* also holds non-vaginal gut and oral bifidobacteria (*B. longum*, *B. breve*, *B. bifidum*).
-
-Second, the catalogs agree with neither VIRGO2 nor each other on the finer structure:
-
-| Catalog | Naming authority | *piotii* | *leopoldii* | *swidsinskii* | *G. vaginalis* sub-clade letters |
-|---|---|---|---|---|---|
-| MetaPhlAn 4 vJan25 | NCBI *Gardnerella* | in composite SGB17305 | in composite SGB17307 | composite SGB17307 | n/a |
-| VIRGO2 | NCBI *Gardnerella* | separable | separable | separable | A, B, C, D, E, F, H |
-| VMGC r214.1 | GTDB *Bifidobacterium* | 4 SGBs | 3 SGBs | 3 SGBs | A, B, C, D, F, H (no E) |
-| GVMG R220 | GTDB *Bifidobacterium* | 1 SGB | none (absent) | 1 SGB | A, B, D, E, F, H, I (no C) |
-
-Two consequences stand out. *G. leopoldii* has no genome bin at all in GVMG: it is absent from the GVMG species roster (Supplementary Table 7) and is not among its named *B. vaginale* genomospecies, so the newest catalog resolves three of the four named species, not four. And the *G. vaginalis* sub-clade letters are not portable: VIRGO2, VMGC, and GVMG each use a different set, so a sub-clade label from one catalog cannot be matched to the same letter in another. Reconcile *G. vaginalis* across catalogs at the species level, not by sub-clade letter.
-
-One caveat on independence: GVMG incorporated about 5,600 prokaryotic genomes compiled by VMGC (Jie et al. 2026, Results), so where VMGC and GVMG agree, that is reference concordance from a shared genome pool, not independent replication. As with the MetaPhlAn caveat above, these counts are anchored to the cited GTDB releases (VMGC r214.1, GVMG R220) and to the published supplementary tables; a later release could regroup the SGBs.
+**Independence.** GVMG incorporated 972 isolates and 4,628 MAGs compiled by VMGC (Jie et al. 2026). Agreement between the two is shared-pool concordance, not replication.
 
 ## Recommendations
 
-1. For species-level vaginal microbiome work, use a vaginal-curated reference such as VIRGO2. Without it, the four-species *Gardnerella* question and the sub-clade layer (where Holm 2023 locates bacterial-vaginosis-associated signal) are unreachable.
-2. Treat MetaPhlAn 4 *Gardnerella* output as SGB-level, not species-level. SGBs remain useful as a cross-cohort denominator, but the printed species names for this genus, and for the seven other affected taxa, should not be read as named-species calls.
-3. Do not interpret a MetaPhlAn `G. pickettii` or `G. swidsinskii` row as that species, because each is a composite bin. If MetaPhlAn must be used, inspect the `t__SGB` identifiers and retain the `additional_species` column.
-4. Re-check per release. These results are anchored to vJan25_CHOCOPhlAnSGB_202503, and a later database could reassign the bins.
-5. With a GTDB-based genome catalog (VMGC, GVMG), match *Gardnerella* on the species epithet, not the genus, because GTDB renames it *Bifidobacterium*. Do not equate *G. vaginalis* sub-clade letters across catalogs, and note that GVMG carries no *G. leopoldii* genome bin.
+1. For species-level *Gardnerella*, use a reference that separates *piotii*, *swidsinskii* and *leopoldii*, such as VIRGO2, and report the GTDB release behind its labels. Holm et al. (2023) mgSs are a separate layer: gene-content assemblages combining genomospecies.
+2. Read MetaPhlAn *Gardnerella* output at `t__SGB` level and keep `additional_species`; do not read `G. pickettii`, `G. swidsinskii` or `G. vaginalis` rows as those species.
+3. Match catalogs by genome (representative, GTDB release, type strain, ANI), not by epithet or suffix letter.
+4. Re-check each database release.
 
-VIRGO2 is better, not perfect. The authors reports that it slightly underestimates *G. swidsinskii* relative to *G. leopoldii*, and *L. paragasseri* relative to *L. gasseri*, because each pair shares some gene clusters (France et al. 2025). This is the same pair that MetaPhlAn merges into SGB17307, so VIRGO2 improves resolution here without making it flawless.
+VIRGO2 has limits too: in mock communities it slightly underestimated *G. swidsinskii* and *L. paragasseri*, because genes shared with *G. leopoldii* and *L. gasseri* were labelled at genus level (France et al. 2025).
 
-## Reproduce it (about 1 minute)
-
-Run `./reproduce.sh`, or the three commands below. The precomputed outputs are committed under [`data/`](data/) so the tables above can be checked without downloading anything.
+## Reproduce it
 
 ```bash
-# 1) MetaPhlAn 4 vJan25: the 12 Gardnerella SGBs (species index, ~1 MB)
-curl -s -o sp.bz2 "http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vJan25_CHOCOPhlAnSGB_202503_species.txt.bz2"
-bunzip2 sp.bz2
-grep -i Gardnerella sp                       # -> 12 SGB lines
-
-# 2) The clade_name MetaPhlAn prints per SGB (marker DB, 70 MB; avoids the 5.1 GB tar)
-curl -s -o mi.txt.bz2 "http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vJan25_CHOCOPhlAnSGB_202503_marker_info.txt.bz2"
-bzcat mi.txt.bz2 | grep -oE "s__[A-Za-z0-9_]+\|t__SGB(17301|17302|17305|17306|17307|17308|17309|17310|21500|33639|152030|152034)\b" | sort -u
-# -> SGB17305 = s__Gardnerella_pickettii ; SGB17307 = s__Gardnerella_swidsinskii ; other 7 named = s__Gardnerella_vaginalis
-
-# 3) VIRGO2: the 16 Gardnerella labels
-curl -sL -o virgo2_taxon.txt.gz "https://media.githubusercontent.com/media/ravel-lab/VIRGO2/main/AnnotationTables/1.VIRGO2.taxon.txt.gz"
-gzip -dc virgo2_taxon.txt.gz | awk -F'\t' '$3 ~ /Gardnerella/ {print $3}' | sort | uniq -c | sort -rn   # -> 16 labels
-# use gzip -dc, not zcat: macOS and BSD zcat expect a .Z file and fail on .gz
+./reproduce.sh               # download pinned inputs (~235 MB), verify SHA-256, rebuild data/
+./reproduce.sh --check       # rebuild into a temp dir and diff against the committed data/
+./reproduce.sh --inputs DIR  # cache downloads in DIR
 ```
 
-All three commands were run against fresh downloads on 8 June 2026 and reproduced the outputs above.
+Requires bash, curl and python3 (standard library only). [`ref/inputs.tsv`](ref/inputs.tsv) pins every input by SHA-256 (MetaPhlAn at commit `424f3e6e`, VIRGO2 at `c65345e6`); a mismatch stops the run. CI runs `--check` weekly on Ubuntu and macOS. Type-strain accessions ([`ref/gardnerella_type_genomes.tsv`](ref/gardnerella_type_genomes.tsv)) come from NCBI Datasets and LPSN (9 October 2026).
+
+| File | Content |
+|---|---|
+| `data/mpa_Gardnerella_SGB_crosswalk.tsv` | 12 MetaPhlAn SGBs: printed names (vJan25, vJan26), member labels, GTDB r220/r226 |
+| `data/mpa_vJan25_Gardnerella_grep.txt` | Raw `species.txt` lines for those SGBs |
+| `data/VIRGO2_Gardnerella_labels.tsv` | 16 VIRGO2 labels with gene counts |
+| `data/gardnerella_named_species_crosswalk.tsv` | Ten LPSN species traced by type genome through GTDB, MetaPhlAn, VIRGO2, VMGC, GVMG |
+| `data/gtdb_Gardnerella_species_by_release.tsv` | GTDB species of each *Gardnerella*-derived genome in r207, r220, r226 |
+| `data/broad_check_vaginal_taxa.tsv` | 17-taxon check, categories A–E |
+
+## Changelog
+
+**9 October 2026**, after an external review:
+- "Four named species" → "the four species of Vaneechoutte et al. (2019)"; LPSN lists ten.
+- VIRGO2 `vaginalis_A`–`_H` are GTDB species clusters, not sub-clades.
+- GVMG contains *G. leopoldii* (in SGB865); previously reported absent.
+- Broad check: 4 of 17 taxa, not 8 (old count included unnamed-genome sharing and split-only taxa).
+- *G. vaginalis* row: "aggregated", not "inflated".
+- Added the SGB→GTDB mapping, vJan26 replication and type-strain crosswalk.
+- `reproduce.sh` derives every table from pinned inputs; the old one broke on an https redirect, used `grep -P` and skipped two tables.
+- Fixed misquotations of Bradshaw et al. 2025 and the VIRGO2 mock-community caveat.
+
+**12 June 2026.** Added the VMGC/GVMG addendum.
 
 ## License
 
-Code and scripts in this repository are licensed under the MIT License; see [`LICENSE`](LICENSE).
-
-Original written analysis, figures, diagrams, and report content are licensed under Creative Commons Attribution 4.0 International (CC BY 4.0); see [`LICENSE-CONTENT.md`](LICENSE-CONTENT.md).
-
-Small committed files under [`data/`](data/) are reproducibility outputs derived from upstream MetaPhlAn 4 and VIRGO2 catalog files. They are included to document the database-content checks, but upstream database and software terms still apply; see [`NOTICE.md`](NOTICE.md).
+Code: MIT ([`LICENSE`](LICENSE)). Written analysis and figures: CC BY 4.0 ([`LICENSE-CONTENT.md`](LICENSE-CONTENT.md)). Files under `data/` derive from MetaPhlAn 4, VIRGO2, GTDB, VMGC and GVMG, whose terms still apply ([`NOTICE.md`](NOTICE.md)).
 
 ## References
 
+- Allini Ntiguemassa P, et al. Further dissection of *Gardnerella vaginalis*: description of *Gardnerella lacydonensis* sp. nov., *Gardnerella bretellae* sp. nov., *Gardnerella massiliensis* sp. nov. and *Gardnerella phocaeensis* sp. nov. *Int J Syst Evol Microbiol* 2026;76:7028. DOI 10.1099/ijsem.0.007028
 - Blanco-Míguez A, et al. Extending and improving metagenomic taxonomic profiling with uncharacterized species using MetaPhlAn 4. *Nature Biotechnology* 2023;41(11):1633-1644. DOI 10.1038/s41587-023-01688-w. PMID 36823356
-- Bradshaw, C.S., et al., Bacterial vaginosis. Nat Rev Dis Primers, 2025. 11(1): p. 43. PMID 40537474
+- Bradshaw CS, et al. Bacterial vaginosis. *Nat Rev Dis Primers* 2025;11(1):43. DOI 10.1038/s41572-025-00626-1. PMID 40537474
 - France MT, et al. VIRGO2: an enhanced gene catalog of the vaginal microbiome. *Nature Communications* 2025. DOI 10.1038/s41467-025-67136-2
 - Goris J, et al. DNA-DNA hybridization values and their relationship to whole-genome sequence similarities. *Int J Syst Evol Microbiol* 2007;57(1):81-91. DOI 10.1099/ijs.0.64483-0. PMID 17220447
-- Hill JE, Albert AYK. Resolution and cooccurrence patterns of the four *Gardnerella* species. *Infection and Immunity* 2019;87(12):e00532-19. DOI 10.1128/IAI.00532-19. PMID 31527125
+- GTDB FAQ: alphabetic suffixes and placeholder names. https://gtdb.ecogenomic.org/faq
+- Hill JE, Albert AYK. Resolution and cooccurrence patterns of *Gardnerella leopoldii*, *G. swidsinskii*, *G. piotii*, and *G. vaginalis* within the vaginal microbiome. *Infection and Immunity* 2019;87(12):e00532-19. DOI 10.1128/IAI.00532-19. PMID 31527125
 - Holm JB, et al. Integrating compositional and functional content to describe vaginal microbiomes in health and disease. *Microbiome* 2023;11:259. DOI 10.1186/s40168-023-01692-x. PMID 38031142
-- Huang L, et al. A multi-kingdom collection of 33,804 reference genomes for the human vaginal microbiome (VMGC). *Nature Microbiology* 2024;9(8):2185-2200. DOI 10.1038/s41564-024-01751-5. PMID 38907008
-- Jie Z, et al. Genomic landscape of the human vaginal microbiome is linked to host genetics and population of origin (GVMG). *Nature Genetics* 2026. DOI 10.1038/s41588-026-02639-2
+- Huang L, et al. A multi-kingdom collection of 33,804 reference genomes for the human vaginal microbiome. *Nature Microbiology* 2024;9(8):2185-2200. DOI 10.1038/s41564-024-01751-5. PMID 38907008
+- Jie Z, et al. Genomic landscape of the human vaginal microbiome is linked to host genetics and population of origin. *Nature Genetics* 2026. DOI 10.1038/s41588-026-02639-2
+- LPSN, genus *Gardnerella*. https://lpsn.dsmz.de/genus/gardnerella (accessed 9 October 2026)
 - MetaPhlAn 4 output format (`additional_species` column): biobakery MetaPhlAn 4 tutorial. https://github.com/biobakery/biobakery/wiki/metaphlan4
+- MetaPhlAn `sgb_to_gtdb_profile.py` and SGB2GTDB tables. https://github.com/biobakery/MetaPhlAn/tree/424f3e6e30618266404353e1083c6405a9f02f48/metaphlan/utils
+- Parks DH, et al. A complete domain-to-species taxonomy for Bacteria and Archaea. *Nature Biotechnology* 2020;38(9):1079-1086. DOI 10.1038/s41587-020-0501-8. PMID 32341564
 - Pasolli E, et al. Extensive unexplored human microbiome diversity revealed by over 150,000 genomes from metagenomes. *Cell* 2019;176(3):649-662. DOI 10.1016/j.cell.2019.01.001. PMID 30661755
 - Richter M, Rosselló-Móra R. Shifting the genomic gold standard for the prokaryotic species definition. *PNAS* 2009;106(45):19126-19131. DOI 10.1073/pnas.0906412106. PMID 19855009
-- Vaneechoutte M, et al. Description of *Gardnerella leopoldii*, *G. piotii*, and *G. swidsinskii*. *Int J Syst Evol Microbiol* 2019;69(3):679-687. DOI 10.1099/ijsem.0.003200. PMID 30648938
+- Sousa M, et al. *Gardnerella pickettii* sp. nov. (formerly *Gardnerella* genomic species 3) and *Gardnerella greenwoodii* sp. nov. (formerly *Gardnerella* genomic species 8) isolated from female urinary microbiome. *Int J Syst Evol Microbiol* 2023;73. DOI 10.1099/ijsem.0.006140
+- Vaneechoutte M, et al. Emended description of *Gardnerella vaginalis* and description of *Gardnerella leopoldii* sp. nov., *Gardnerella piotii* sp. nov. and *Gardnerella swidsinskii* sp. nov., with delineation of 13 genomic species within the genus *Gardnerella*. *Int J Syst Evol Microbiol* 2019;69(3):679-687. DOI 10.1099/ijsem.0.003200. PMID 30648938

@@ -1,0 +1,22 @@
+# MetaPhlAn 4 Gardnerella SGBs: what each prints, which genome labels it holds, and MetaPhlAn's own GTDB mapping.
+# Sources (pinned in ref/inputs.tsv):
+#   printed_clade_name_*   mpa_vJan25_CHOCOPhlAnSGB_202503 / mpa_vJan26_CHOCOPhlAnSGB_202605 marker_info.txt, the s__ node directly above t__<SGB>
+#   *_labels_in_SGB         mpa_vJan25_CHOCOPhlAnSGB_202503 species.txt (all genome labels MetaPhlAn assigns to the SGB)
+#   gtdb_r220 / gtdb_r226   MetaPhlAn utils/mpa_vJan25_CHOCOPhlAnSGB_202503_SGB2GTDB_r220.tsv and mpa_vJan26_CHOCOPhlAnSGB_202605_SGB2GTDB_r226.tsv
+#                           (the tables MetaPhlAn's sgb_to_gtdb_profile.py uses)
+# named = plain binomial label; placeholders (Genus_sp_*, *_bacterium_*, Genus_SGBnnnn) are listed as other labels.
+# Labels are NCBI names attached to member genomes; legacy genomes deposited as 'G. vaginalis' predate the 2019+ species descriptions.
+# GTDB alphabetic suffixes are release-specific placeholders; compare gtdb_r220 with gtdb_r226 (e.g. SGB17302).
+SGB	printed_clade_name_vJan25	printed_clade_name_vJan26	named_labels_in_SGB_vJan25	other_labels_in_SGB_vJan25	labels_identical_in_vJan26	gtdb_r220_mpa_map	gtdb_r226_mpa_map
+SGB17301	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_sp_KA00735	yes	Bifidobacterium vaginale_A	Bifidobacterium vaginale_A
+SGB17302	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis	-	yes	Bifidobacterium vaginale	Bifidobacterium vaginale_C
+SGB17305	Gardnerella_pickettii	Gardnerella_pickettii	Gardnerella_pickettii; Gardnerella_vaginalis; Gardnerella_piotii	Bifidobacteriaceae_bacterium_VN002; Bifidobacteriaceae_bacterium_N170; Bifidobacteriaceae_bacterium_NR026	yes	Bifidobacterium vaginale_I	Bifidobacterium vaginale_I
+SGB17306	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis	-	yes	Bifidobacterium vaginale_B	Bifidobacterium vaginale_B
+SGB17307	Gardnerella_swidsinskii	Gardnerella_swidsinskii	Gardnerella_swidsinskii; Gardnerella_leopoldii	Bifidobacteriaceae_bacterium_WP022; Bifidobacteriaceae_bacterium_NR020; Bifidobacteriaceae_bacterium_NR021; Bifidobacteriaceae_bacterium_NR016; Bifidobacteriaceae_bacterium_NR015; Bifidobacteriaceae_bacterium_WP021; Bifidobacteriaceae_bacterium_NR017; Gardnerella_sp_DNF01162; Bifidobacteriaceae_bacterium_VN003	yes	Bifidobacterium sp003585845	Bifidobacterium sp003585845
+SGB17308	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis	-	yes	Bifidobacterium vaginale_D	Bifidobacterium vaginale_D
+SGB17309	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis; Gardnerella_greenwoodii	Bifidobacteriaceae_bacterium_NR043; Bifidobacteriaceae_bacterium_WP012; Bifidobacteriaceae_bacterium_NR003	yes	Bifidobacterium vaginale_E	Bifidobacterium vaginale_E
+SGB17310	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis	-	yes	Bifidobacterium vaginale_F	Bifidobacterium vaginale_F
+SGB21500	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_vaginalis	Gardnerella_sp_Marseille_Q2328	yes	Bifidobacterium vaginale_H	Bifidobacterium vaginale_H
+SGB33639	Gardnerella_SGB33639	Gardnerella_SGB33639	-	Gardnerella_SGB33639	yes	Bifidobacterium sp003585735	Bifidobacterium sp003585735
+SGB152030	Gardnerella_SGB152030	Gardnerella_SGB152030	-	Gardnerella_SGB152030	yes	Bifidobacterium sp946891915	Bifidobacterium sp946891915
+SGB152034	Gardnerella_SGB152034	Gardnerella_SGB152034	-	Gardnerella_SGB152034	yes	Bifidobacterium sp947292085	Bifidobacterium sp947292085

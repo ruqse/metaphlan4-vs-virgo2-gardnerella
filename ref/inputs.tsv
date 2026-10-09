@@ -1,0 +1,15 @@
+# Pinned upstream inputs for reproduce.sh: file name, SHA-256, download URL (tab-separated).
+# MetaPhlAn SGB2GTDB tables are pinned to MetaPhlAn commit 424f3e6e; the VIRGO2 table to VIRGO2 commit c65345e6.
+# A checksum mismatch means the upstream file changed; reproduce.sh stops rather than silently using it.
+mpa_vJan25_CHOCOPhlAnSGB_202503_species.txt.bz2	1207a258f7b08b5c4398207af85a9c2c2fbc0d750ecaba53043a6dabafe901cb	https://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vJan25_CHOCOPhlAnSGB_202503_species.txt.bz2
+mpa_vJan25_CHOCOPhlAnSGB_202503_marker_info.txt.bz2	8a408c2b459ae4ee2f440b258a417642d5d0afa40d75029e972c6f5b0876db0d	https://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vJan25_CHOCOPhlAnSGB_202503_marker_info.txt.bz2
+mpa_vJan26_CHOCOPhlAnSGB_202605_species.txt.bz2	441f86af40f587b969b40ebdb79ffb02b311ffec4c81024d8001e529c6ea5572	https://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vJan26_CHOCOPhlAnSGB_202605_species.txt.bz2
+mpa_vJan26_CHOCOPhlAnSGB_202605_marker_info.txt.bz2	ead26c31ee7c7f7ae8ffb6f3b5b489c35e19ad7ca13f79d2387e0ae8fd6ab0cd	https://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases/mpa_vJan26_CHOCOPhlAnSGB_202605_marker_info.txt.bz2
+mpa_vJan25_CHOCOPhlAnSGB_202503_SGB2GTDB_r220.tsv	037947d047f48719359905c63a0ba51ae0e12cbfae15d8fda02c2e82524313c2	https://raw.githubusercontent.com/biobakery/MetaPhlAn/424f3e6e30618266404353e1083c6405a9f02f48/metaphlan/utils/mpa_vJan25_CHOCOPhlAnSGB_202503_SGB2GTDB_r220.tsv
+mpa_vJan26_CHOCOPhlAnSGB_202605_SGB2GTDB_r226.tsv	a7a198208ac4a0eb2f6b1b2030b68f8920d548093cc7b2c8af2faf4209395b0f	https://raw.githubusercontent.com/biobakery/MetaPhlAn/424f3e6e30618266404353e1083c6405a9f02f48/metaphlan/utils/mpa_vJan26_CHOCOPhlAnSGB_202605_SGB2GTDB_r226.tsv
+1.VIRGO2.taxon.txt.gz	ff54c3c1c197ba9c951fe61c095ae01789ab2e6cd1ed5f80dcc6637f55d46474	https://media.githubusercontent.com/media/ravel-lab/VIRGO2/c65345e61a1fa2d2ad177eefa1bfaf626ca65a3d/AnnotationTables/1.VIRGO2.taxon.txt.gz
+bac120_taxonomy_r207.tsv.gz	2c14f673cfc5a4bbc9d10171dfb5c949698281b46297c8d4012b8e59266e7e74	https://data.gtdb.ecogenomic.org/releases/release207/207.0/bac120_taxonomy_r207.tsv.gz
+bac120_taxonomy_r220.tsv.gz	0e4318af347bf1afa31d323bdc82000b2a3823d6e67eac6a585465313207766d	https://data.gtdb.ecogenomic.org/releases/release220/220.0/bac120_taxonomy_r220.tsv.gz
+bac120_taxonomy_r226.tsv.gz	a54d30b1deb505e813cb754f4298a225687df3cd882675cad7b53796d1429ebc	https://data.gtdb.ecogenomic.org/releases/release226/226.0/bac120_taxonomy_r226.tsv.gz
+41564_2024_1751_MOESM4_ESM.xlsx	d57c6867708b9c6e35afb84e61fc01f509e39e391315161b46f2f6732e4408aa	https://static-content.springer.com/esm/art%3A10.1038%2Fs41564-024-01751-5/MediaObjects/41564_2024_1751_MOESM4_ESM.xlsx
+41588_2026_2639_MOESM4_ESM.xlsx	8bc91f1368863efe101c3b36e1ed625bdf2960c62564cf5f43fc03516d5054fe	https://static-content.springer.com/esm/art%3A10.1038%2Fs41588-026-02639-2/MediaObjects/41588_2026_2639_MOESM4_ESM.xlsx

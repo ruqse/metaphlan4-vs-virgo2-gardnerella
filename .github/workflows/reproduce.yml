@@ -1,0 +1,26 @@
+name: reproduce
+
+# Rebuild every table in data/ from the pinned inputs in ref/inputs.tsv and fail if anything differs.
+# The weekly run catches upstream drift (a changed checksum or an unreachable URL).
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: .inputs-cache
+          key: inputs-${{ hashFiles('ref/inputs.tsv') }}
+      - name: Rebuild data/ and diff against the committed copy
+        run: ./reproduce.sh --check --inputs .inputs-cache

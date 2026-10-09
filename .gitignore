@@ -1,9 +1,13 @@
-# Large downloads produced by reproduce.sh (regenerable; not committed)
-sp
-*.bz2
-*.gz
-mi.txt
-virgo2*.txt
+# Downloads land in a temp dir (or --inputs DIR); keep stray copies out of the repo root
+/sp
+/mi.txt
+/*.bz2
+/*.gz
+/*.xlsx
+/virgo2*.txt
+.DS_Store
+# Locally rendered report (not part of the published analysis)
 gardnerella_metaphlan_virgo2_report.pdf
 gardnerella_metaphlan_virgo2_report.html
 report.css
+/.inputs-cache/

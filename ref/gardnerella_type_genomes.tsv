@@ -1,0 +1,14 @@
+# Validly published Gardnerella species (LPSN genus page, accessed 2026-10-09) and the RefSeq assembly NCBI flags as
+# "assembly from type material" for each (NCBI Datasets v2 genome dataset_report, queried 2026-10-09).
+# vaginalis has two type-material assemblies of ATCC 14018 / NCTC 10287; GCF_001042655.1 is the one GTDB uses as the B. vaginale representative.
+lpsn_species	authority	type_strain	type_genome
+Gardnerella vaginalis	Gardner and Dukes 1955; emend. Greenwood and Pickett 1980; emend. Vaneechoutte et al. 2019	ATCC 14018	GCF_001042655.1
+Gardnerella leopoldii	Vaneechoutte et al. 2019	UGent 06.41	GCF_003293675.1
+Gardnerella piotii	Vaneechoutte et al. 2019	UGent 18.01	GCF_003397585.1
+Gardnerella swidsinskii	Vaneechoutte et al. 2019	GS 9838-1	GCF_003397705.1
+Gardnerella pickettii	Sousa et al. 2023	c17Ua_112	GCF_029226345.1
+Gardnerella greenwoodii	Sousa et al. 2023	c31Ua_26	GCF_029207615.1
+Gardnerella bretellae	Allini Ntiguemassa et al. 2026	Marseille-QA0894	GCF_048545135.1
+Gardnerella lacydonensis	Allini Ntiguemassa et al. 2026	Marseille-Q9181	GCF_048545055.1
+Gardnerella massiliensis	Allini Ntiguemassa et al. 2026	Marseille-Q2328	GCF_940796375.1
+Gardnerella phocaeensis	Allini Ntiguemassa et al. 2026	Marseille-Q9179	GCF_048545075.1

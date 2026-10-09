@@ -1,37 +1,74 @@
 #!/usr/bin/env bash
-# Reproduce the MetaPhlAn 4 vs VIRGO2 Gardnerella database-content comparison.
-# Downloads ~85 MB total, runs in about 1 minute, and prints the three results.
-# Verified outputs are committed under data/ for offline checking.
+# Rebuild every table under data/ from pinned upstream inputs.
+#
+#   ./reproduce.sh                 download inputs, verify SHA-256, regenerate data/
+#   ./reproduce.sh --check         same, but write to a temp dir and diff against the committed data/
+#                                  (exit 1 on any difference)
+#   ./reproduce.sh --inputs DIR    keep downloads in DIR and reuse them on later runs
+#
+# Inputs (about 235 MB) and their checksums are listed in ref/inputs.tsv. Requires bash, curl and
+# python3 (standard library only). Works with macOS BSD tools and GNU coreutils.
 set -euo pipefail
-cd "$(dirname "$0")"
-work="$(mktemp -d)"; trap 'rm -rf "$work"' EXIT; cd "$work"
+export LC_ALL=C
 
-base="http://cmprod1.cibio.unitn.it/biobakery4/metaphlan_databases"
+repo="$(cd "$(dirname "$0")" && pwd)"
+mode=write
+inputs=""
 
-echo "== 1) MetaPhlAn 4 vJan25: Gardnerella SGBs (species index, ~1 MB) =="
-curl -s -o sp.bz2 "$base/mpa_vJan25_CHOCOPhlAnSGB_202503_species.txt.bz2"
-bunzip2 sp.bz2
-echo "Gardnerella SGB lines: $(grep -ic Gardnerella sp)  (expected: 12)"
+usage() { sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'; }
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --check) mode=check ;;
+    --inputs) [ $# -ge 2 ] || { usage; exit 2; }; inputs="$2"; shift ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "unknown argument: $1" >&2; usage >&2; exit 2 ;;
+  esac
+  shift
+done
 
-echo "== 1b) Broad check: 17 canonical vaginal taxa (same species index; backs data/broad_check_vaginal_taxa.tsv) =="
-grep -iP 's__Lactobacillus_(crispatus|iners|jensenii|gasseri|paragasseri)\b' sp || true
-grep -iE 'g__Gardnerella' sp || true
-grep -i  'Fannyhessea' sp || true
-grep -iP 's__Prevotella_(bivia|amnii|disiens)\b' sp || true
-grep -i  'Sneathia' sp || true
-grep -iE 's__Megasphaera_lornae' sp || true
-grep -i  'Mobiluncus' sp || true
-grep -iE 's__Ureaplasma_(urealyticum|parvum)' sp || true
-grep -iE 's__Streptococcus_agalactiae' sp || true
+work="$(mktemp -d)"
+trap 'rm -rf "$work"' EXIT
+[ -n "$inputs" ] || inputs="$work/inputs"
+mkdir -p "$inputs"
 
-echo "== 2) clade_name MetaPhlAn prints per SGB (marker DB, 70 MB) =="
-curl -s -o mi.txt.bz2 "$base/mpa_vJan25_CHOCOPhlAnSGB_202503_marker_info.txt.bz2"
-bzcat mi.txt.bz2 \
-  | grep -oE "s__[A-Za-z0-9_]+\|t__SGB(17301|17302|17305|17306|17307|17308|17309|17310|21500|33639|152030|152034)\b" \
-  | sort -u
+sha256() {
+  if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | cut -d' ' -f1
+  else shasum -a 256 "$1" | cut -d' ' -f1; fi
+}
 
-echo "== 3) VIRGO2: Gardnerella labels =="
-curl -sL -o virgo2.txt.gz "https://media.githubusercontent.com/media/ravel-lab/VIRGO2/main/AnnotationTables/1.VIRGO2.taxon.txt.gz"
-# use gzip -dc, not zcat: macOS/BSD zcat expects a .Z file and fails on .gz
-gzip -dc virgo2.txt.gz | awk -F'\t' '$3 ~ /Gardnerella/ {print $3}' | sort | uniq -c | sort -rn
-echo "VIRGO2 Gardnerella labels: $(gzip -dc virgo2.txt.gz | awk -F'\t' '$3 ~ /Gardnerella/ {print $3}' | sort -u | wc -l | tr -d ' ')  (expected: 16)"
+echo "== 1) Fetch and verify pinned inputs (ref/inputs.tsv)"
+tab="$(printf '\t')"
+while IFS="$tab" read -r name expected url; do
+  case "$name" in ''|\#*) continue ;; esac
+  dest="$inputs/$name"
+  if [ -f "$dest" ] && [ "$(sha256 "$dest")" = "$expected" ]; then
+    echo "   cached   $name"
+    continue
+  fi
+  echo "   fetching $name"
+  curl -fsSL --retry 3 --retry-delay 5 -o "$dest.part" "$url"
+  mv "$dest.part" "$dest"
+  actual="$(sha256 "$dest")"
+  if [ "$actual" != "$expected" ]; then
+    echo "SHA-256 mismatch for $name" >&2
+    echo "  expected $expected" >&2
+    echo "  actual   $actual" >&2
+    echo "The upstream file has changed since it was pinned; review it before updating ref/inputs.tsv." >&2
+    exit 1
+  fi
+done < "$repo/ref/inputs.tsv"
+
+if [ "$mode" = check ]; then out="$work/data"; else out="$repo/data"; fi
+
+echo "== 2) Derive tables into ${out#$repo/}"
+python3 "$repo/scripts/derive.py" --inputs "$inputs" --out "$out" --ref "$repo/ref"
+
+if [ "$mode" = check ]; then
+  echo "== 3) Compare with committed data/"
+  if diff -ru "$repo/data" "$out"; then
+    echo "OK: committed data/ matches a fresh rebuild."
+  else
+    echo "FAIL: committed data/ differs from a fresh rebuild (diff above)." >&2
+    exit 1
+  fi
+fi
