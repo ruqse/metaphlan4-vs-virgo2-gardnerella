@@ -1,15 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="790" viewBox="0 0 1800 790" role="img" aria-labelledby="title desc">
   <title id="title">Gardnerella Catalog Resolution Matrix</title>
-  <desc id="desc">How MetaPhlAn 4 vJan25 SGBs and VIRGO2 represent the four Gardnerella species of Vaneechoutte et al. 2019.</desc>
+  <desc id="desc">How MetaPhlAn 4 vJan25 SGBs, VIRGO2 labels and GVMG SGBs represent the four Gardnerella species of Vaneechoutte et al. 2019.</desc>
   <defs>
     <style>
       .bg { fill: #ffffff; }
       .header { font: 700 27px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
+      .subhead { font: 400 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5563; }
       .species { font: italic 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #111827; }
       .cell-title { font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 0; }
       .cell-text { font: 400 21px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2937; }
       .cell-note { font: 400 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5563; }
       .legend { font: 400 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #374151; }
+      .footnote { font: 400 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #374151; }
       .footer { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #6b7280; }
       .row-line { stroke: #e5e7eb; stroke-width: 1; }
       .column-rule { stroke: #eef2f7; stroke-width: 2; }
@@ -22,68 +24,95 @@
     </style>
   </defs>
 
-  <rect class="bg" width="1600" height="760"/>
+  <rect class="bg" width="1800" height="790"/>
 
-  <line class="column-rule" x1="430" y1="85" x2="430" y2="642"/>
-  <line class="column-rule" x1="1020" y1="85" x2="1020" y2="642"/>
+  <!-- columns: species 40-350 | MetaPhlAn 370-800 | VIRGO2 840-1270 | GVMG 1310-1740 -->
+  <line class="column-rule" x1="350" y1="95" x2="350" y2="645"/>
+  <line class="column-rule" x1="820" y1="95" x2="820" y2="645"/>
+  <line class="column-rule" x1="1290" y1="95" x2="1290" y2="645"/>
 
-  <text class="header" x="250" y="60" text-anchor="middle">Gardnerella species</text>
-  <text class="cell-note" x="250" y="88" text-anchor="middle">Vaneechoutte et al. 2019</text>
-  <text class="header" x="725" y="60" text-anchor="middle">MetaPhlAn 4</text>
-  <text class="header" x="1260" y="60" text-anchor="middle">VIRGO2</text>
+  <text class="header" x="195" y="50" text-anchor="middle">Gardnerella species</text>
+  <text class="subhead" x="195" y="80" text-anchor="middle">Vaneechoutte et al. 2019</text>
+  <text class="header" x="585" y="50" text-anchor="middle">MetaPhlAn 4</text>
+  <text class="subhead" x="585" y="80" text-anchor="middle">SGBs, vJan25 (same in vJan26)</text>
+  <text class="header" x="1055" y="50" text-anchor="middle">VIRGO2</text>
+  <text class="subhead" x="1055" y="80" text-anchor="middle">gene labels, GTDB r207</text>
+  <text class="header" x="1525" y="50" text-anchor="middle">GVMG</text>
+  <text class="subhead" x="1525" y="80" text-anchor="middle">SGBs, GTDB R220</text>
 
-  <line class="row-line" x1="90" y1="100" x2="1510" y2="100"/>
-  <line class="row-line" x1="90" y1="230" x2="1510" y2="230"/>
-  <line class="row-line" x1="90" y1="360" x2="1510" y2="360"/>
-  <line class="row-line" x1="90" y1="490" x2="1510" y2="490"/>
-  <line class="row-line" x1="90" y1="620" x2="1510" y2="620"/>
+  <line class="row-line" x1="40" y1="110" x2="1760" y2="110"/>
+  <line class="row-line" x1="40" y1="240" x2="1760" y2="240"/>
+  <line class="row-line" x1="40" y1="370" x2="1760" y2="370"/>
+  <line class="row-line" x1="40" y1="500" x2="1760" y2="500"/>
+  <line class="row-line" x1="40" y1="630" x2="1760" y2="630"/>
 
-  <text class="species" x="250" y="173" text-anchor="middle">G. vaginalis</text>
-  <rect class="merged" x="500" y="120" width="470" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title merged-label" x="535" y="153">AGGREGATED ACROSS 7 SGBs</text>
-  <text class="cell-text" x="535" y="179">7 GTDB species summed in one row</text>
-  <text class="cell-note" x="535" y="202">printed as G. vaginalis</text>
-  <rect class="resolved" x="1080" y="120" width="440" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title resolved-label" x="1115" y="153">RESOLVED</text>
-  <text class="cell-text" x="1115" y="179">own species label</text>
-  <text class="cell-note" x="1115" y="202">1 of 15 species-level labels</text>
+  <!-- G. vaginalis -->
+  <text class="species" x="195" y="183" text-anchor="middle">G. vaginalis</text>
+  <rect class="merged" x="370" y="130" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title merged-label" x="400" y="163">AGGREGATED ACROSS 7 SGBs</text>
+  <text class="cell-text" x="400" y="189">7 GTDB species in one row</text>
+  <text class="cell-note" x="400" y="212">printed as G. vaginalis</text>
+  <rect class="resolved" x="840" y="130" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="870" y="163">RESOLVED</text>
+  <text class="cell-text" x="870" y="189">own species label</text>
+  <text class="cell-note" x="870" y="212">vaginalis_A–F, H labelled separately</text>
+  <rect class="resolved" x="1310" y="130" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="1340" y="163">RESOLVED</text>
+  <text class="cell-text" x="1340" y="189">own SGB (SGB864)</text>
+  <text class="cell-note" x="1340" y="212">7 suffixed B. vaginale SGBs apart</text>
 
-  <text class="species" x="250" y="303" text-anchor="middle">G. piotii</text>
-  <rect class="hidden" x="500" y="250" width="470" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title hidden-label" x="535" y="283">FOLDED</text>
-  <text class="cell-text" x="535" y="309">inside SGB17305</text>
-  <text class="cell-note" x="535" y="332">row prints as G. pickettii</text>
-  <rect class="resolved" x="1080" y="250" width="440" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title resolved-label" x="1115" y="283">RESOLVED</text>
-  <text class="cell-text" x="1115" y="309">own species label</text>
-  <text class="cell-note" x="1115" y="332">separable from G. vaginalis</text>
+  <!-- G. piotii -->
+  <text class="species" x="195" y="313" text-anchor="middle">G. piotii</text>
+  <rect class="hidden" x="370" y="260" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title hidden-label" x="400" y="293">FOLDED</text>
+  <text class="cell-text" x="400" y="319">inside SGB17305</text>
+  <text class="cell-note" x="400" y="342">row prints as G. pickettii</text>
+  <rect class="resolved" x="840" y="260" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="870" y="293">RESOLVED</text>
+  <text class="cell-text" x="870" y="319">own species label</text>
+  <text class="cell-note" x="870" y="342">no separate G. pickettii label</text>
+  <rect class="resolved" x="1310" y="260" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="1340" y="293">RESOLVED</text>
+  <text class="cell-text" x="1340" y="319">own SGB (SGB862)</text>
+  <text class="cell-note" x="1340" y="342">labelled B. piotii</text>
 
-  <text class="species" x="250" y="433" text-anchor="middle">G. leopoldii</text>
-  <rect class="hidden" x="500" y="380" width="470" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title hidden-label" x="535" y="413">FOLDED</text>
-  <text class="cell-text" x="535" y="439">inside SGB17307</text>
-  <text class="cell-note" x="535" y="462">row prints as G. swidsinskii</text>
-  <rect class="resolved" x="1080" y="380" width="440" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title resolved-label" x="1115" y="413">RESOLVED</text>
-  <text class="cell-text" x="1115" y="439">own species label</text>
-  <text class="cell-note" x="1115" y="462">separable from G. swidsinskii</text>
+  <!-- G. leopoldii -->
+  <text class="species" x="195" y="443" text-anchor="middle">G. leopoldii</text>
+  <rect class="hidden" x="370" y="390" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title hidden-label" x="400" y="423">FOLDED</text>
+  <text class="cell-text" x="400" y="449">inside SGB17307</text>
+  <text class="cell-note" x="400" y="472">row prints as G. swidsinskii</text>
+  <rect class="resolved" x="840" y="390" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="870" y="423">RESOLVED</text>
+  <text class="cell-text" x="870" y="449">own species label</text>
+  <text class="cell-note" x="870" y="472">separable from G. swidsinskii</text>
+  <rect class="hidden" x="1310" y="390" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title hidden-label" x="1340" y="423">FOLDED*</text>
+  <text class="cell-text" x="1340" y="449">type genome inside SGB865</text>
+  <text class="cell-note" x="1340" y="472">SGB labelled B. swidsinskii</text>
 
-  <text class="species" x="250" y="563" text-anchor="middle">G. swidsinskii</text>
-  <rect class="merged" x="500" y="510" width="470" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title merged-label" x="535" y="543">CO-BINNED</text>
-  <text class="cell-text" x="535" y="569">SGB17307, shared bin</text>
-  <text class="cell-note" x="535" y="592">includes G. leopoldii</text>
-  <rect class="resolved" x="1080" y="510" width="440" height="90" rx="8" stroke-width="3"/>
-  <text class="cell-title resolved-label" x="1115" y="543">RESOLVED</text>
-  <text class="cell-text" x="1115" y="569">own species label</text>
-  <text class="cell-note" x="1115" y="592">separable named species</text>
+  <!-- G. swidsinskii -->
+  <text class="species" x="195" y="573" text-anchor="middle">G. swidsinskii</text>
+  <rect class="merged" x="370" y="520" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title merged-label" x="400" y="553">CO-BINNED</text>
+  <text class="cell-text" x="400" y="579">SGB17307, shared bin</text>
+  <text class="cell-note" x="400" y="602">includes G. leopoldii</text>
+  <rect class="resolved" x="840" y="520" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title resolved-label" x="870" y="553">RESOLVED</text>
+  <text class="cell-text" x="870" y="579">own species label</text>
+  <text class="cell-note" x="870" y="602">separable from G. leopoldii</text>
+  <rect class="merged" x="1310" y="520" width="430" height="90" rx="8" stroke-width="3"/>
+  <text class="cell-title merged-label" x="1340" y="553">CO-BINNED</text>
+  <text class="cell-text" x="1340" y="579">SGB865, shared bin</text>
+  <text class="cell-note" x="1340" y="602">includes G. leopoldii</text>
 
-  <rect class="resolved" x="395" y="670" width="34" height="22" rx="3" stroke-width="2"/>
-  <text class="legend" x="448" y="687">own species-level label</text>
-  <rect class="merged" x="690" y="670" width="34" height="22" rx="3" stroke-width="2"/>
-  <text class="legend" x="743" y="687">co-binned or aggregated row</text>
-  <rect class="hidden" x="1070" y="670" width="34" height="22" rx="3" stroke-width="2"/>
-  <text class="legend" x="1123" y="687">folded into another printed row</text>
+  <rect class="resolved" x="470" y="672" width="34" height="22" rx="3" stroke-width="2"/>
+  <text class="legend" x="518" y="689">own species-level label or SGB</text>
+  <rect class="merged" x="840" y="672" width="34" height="22" rx="3" stroke-width="2"/>
+  <text class="legend" x="888" y="689">co-binned or aggregated</text>
+  <rect class="hidden" x="1150" y="672" width="34" height="22" rx="3" stroke-width="2"/>
+  <text class="legend" x="1198" y="689">folded into another species' bin</text>
 
-  <text class="footer" x="800" y="735" text-anchor="middle">MetaPhlAn 4 vJan25_CHOCOPhlAnSGB_202503 (unchanged in vJan26) vs VIRGO2 (France et al. 2025). Database-content analysis; not a per-read benchmark.</text>
+  <text class="footnote" x="900" y="732" text-anchor="middle">* VMGC (GTDB r214.1) keeps G. leopoldii in 3 separate SGBs.</text>
+  <text class="footer" x="900" y="764" text-anchor="middle">MetaPhlAn 4 vJan25_CHOCOPhlAnSGB_202503 · VIRGO2 (France et al. 2025) · GVMG (Jie et al. 2026). Database-content analysis; not a per-read benchmark.</text>
 </svg>

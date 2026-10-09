@@ -2,7 +2,7 @@
 
 *MetaPhlAn 4 co-bins* G. piotii *with* G. pickettii *and* G. swidsinskii *with* G. leopoldii, *and its* G. vaginalis *row aggregates seven GTDB species clusters. A database-content comparison of MetaPhlAn 4 (vJan25_CHOCOPhlAnSGB_202503, replicated on vJan26), VIRGO2, VMGC and GVMG. Faruk Dube, 8 June 2026; revised 9 October 2026 (see [Changelog](#changelog)).*
 
-![How MetaPhlAn 4 and VIRGO2 represent the four Gardnerella species of Vaneechoutte et al. 2019](figures/gardnerella_catalog_resolution_matrix.png)
+![How MetaPhlAn 4, VIRGO2 and GVMG represent the four Gardnerella species of Vaneechoutte et al. 2019](figures/gardnerella_catalog_resolution_matrix.png)
 
 ## Summary
 
@@ -128,7 +128,7 @@ Requires bash, curl and python3 (standard library only). [`ref/inputs.tsv`](ref/
 - GVMG contains *G. leopoldii* (in SGB865); previously reported absent.
 - Broad check: 4 of 17 taxa, not 8 (old count included unnamed-genome sharing and split-only taxa).
 - *G. vaginalis* row: "aggregated", not "inflated".
-- Added the SGB→GTDB mapping, vJan26 replication and type-strain crosswalk.
+- Added the SGB→GTDB mapping, vJan26 replication, type-strain crosswalk and a GVMG column in the figure.
 - `reproduce.sh` derives every table from pinned inputs; the old one broke on an https redirect, used `grep -P` and skipped two tables.
 - Fixed misquotations of Bradshaw et al. 2025 and the VIRGO2 mock-community caveat.
 
